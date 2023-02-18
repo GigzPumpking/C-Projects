@@ -11,6 +11,7 @@ typedef uint32_t Set;
 Set set_insert(Set s, uint8_t x) {
     return (s | (1 << x));
 }
+//sets xth bit in Set s to true (1)
 
 bool set_member(Set s, uint8_t x) {
     if ((s & (1 << x)) == 0) {
@@ -18,8 +19,9 @@ bool set_member(Set s, uint8_t x) {
     }
     return true;
 }
+//checks xth bit in Set s and returns its boolean value
 
-//Use Sets as a boolean cabinet.
+//Use Sets as a boolean cabinet to check for operations.
 
 int main(int argc, char **argv) {
     uint32_t num1 = 0, num2 = 0, res = 0, rem = 0;
@@ -31,7 +33,7 @@ int main(int argc, char **argv) {
         switch (opt) {
         case 'i': num1 = (uint32_t) strtoul(optarg, NULL, 10); break;
         case 'j': num2 = (uint32_t) strtoul(optarg, NULL, 10); break;
-        //translates optarg into double format in base 10
+        //translates optarg into uint32_t format in base 10
         case 'a': s = set_insert(s, 0); break;
         case 's': s = set_insert(s, 1); break;
         case 'm': s = set_insert(s, 2); break;
@@ -40,7 +42,7 @@ int main(int argc, char **argv) {
         }
     }
     if (set_member(s, 4) || s == 0) {
-        fprintf(stderr, "SYNOPSIS\n"
+        fprintf(stderr, "\nSYNOPSIS\n"
                         "   A simple add/sub/mul/div calculator for unsigned integers. No decimals: displays remainder if any.\n"
                         "\n"
                         "USAGE\n"
@@ -59,19 +61,19 @@ int main(int argc, char **argv) {
     }
     
     if (set_member(s, 0)) {
-        res = num1 + num2; printf("%u + %u = %u\n", num1, num2, res);
+        res = num1 + num2; printf("%" PRIu32 " + %" PRIu32 "= %" PRIu32 "\n", num1, num2, res);
     } 
 
     if (set_member(s, 1)) {
-        res = num1 - num2; printf("%u - %u = %u\n", num1, num2, res);
+        res = num1 - num2; printf("%" PRIu32 " - %" PRIu32 "= %" PRIu32 "\n", num1, num2, res);
     }
 
     if (set_member(s, 2)) {
-        res = num1 * num2; printf("%u * %u = %u\n", num1, num2, res);
+        res = num1 * num2; printf("%" PRIu32 " * %" PRIu32 "= %" PRIu32 "\n", num1, num2, res);
     }
 
     if (set_member(s, 3)) {
-        res = num1 / num2; rem = num1 % num2; printf("%u / %u = %u, remainder = %u\n", num1, num2, res, rem);
+        res = num1 / num2; rem = num1 % num2; printf("%" PRIu32 " / %" PRIu32 "= %" PRIu32 " remainder = %u\n", num1, num2, res, rem);
     }
     return 0;
 }
