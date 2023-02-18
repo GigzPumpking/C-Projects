@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
                         "   -a              Adds num1 and num2.\n"
                         "   -s              Subtract num1 and num2.\n"
                         "   -m              Multiply num1 and num2.\n"
-                        "   -d              Divide num1 and num2.\n"
+                        "   -d              Divide num1 and num2, displays remainder.\n"
                         "   -i num1         Set num1 to uint32_t (unsigned 32-bit int) (default value: 0).\n"
                         "   -j num2         Set num2 to uint32_t (unsigned 32-bit int) (default value: 0).\n"
                         "   -p elements     Specify number of elements to print (default: 100).\n");
