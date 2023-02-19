@@ -32,6 +32,7 @@ uint32_t sub(uint32_t num1, uint32_t num2) {
         printf("%" PRIu32 " is less than %" PRIu32 ". Since we are working with unsigned integers, the following value will be unsigned, but still represents a negative integer.\n", num1, num2);
         return num2 - num1;
     }
+    //Check if num1 is less than num2. Subtracting such values would cause issues as we are dealing with unsigned ints. It would wrap around to the limit of a uint32_t, which is 4,294,967,295
     else {
         return num1 - num2;
     }
@@ -48,6 +49,8 @@ uint32_t quo(uint32_t num1, uint32_t num2) {
 uint32_t mod(uint32_t num1, uint32_t num2) {
     return num1 % num2;
 }
+
+//Addition, Subtraction, Multiplication, Division, and Modulus functions
 
 int main(int argc, char **argv) {
     uint32_t num1 = 0, num2 = 0, res = 0, rem = 0;
