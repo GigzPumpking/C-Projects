@@ -35,6 +35,10 @@ Run '$ ./calculator' along with any of the listed options:
         -m             | - Multiplies num1 and num2.
 
         -d             | - Divides num1 and num2, displays remainder.
+        
+        -r             | - Mods num1 and num2 (returns the remainder).
+
+        -e             | - Raises num1 to the power of num2.        
 
         -i num1        | - Sets num1 to user argument (Defaults to 0).
 

@@ -3,8 +3,8 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <inttypes.h>
-#define OPTIONS "asmdi:j:H"
-//a = add, s = sub, m = mul, d = div, n = num, m = num2, H = help
+#define OPTIONS "asmdrei:j:H"
+//a = add, s = sub, m = mul, d = quo, r = mod, e = power, n = num, m = num2, H = help
 
 typedef uint32_t Set;
 
@@ -50,7 +50,16 @@ uint32_t mod(uint32_t num1, uint32_t num2) {
     return num1 % num2;
 }
 
-//Addition, Subtraction, Multiplication, Division, and Modulus functions
+uint32_t power(uint32_t num1, uint32_t num2) {
+    uint32_t res = num1;
+    for (uint32_t i = 1; i < num2; i++) {
+        res *= num1;
+    }
+    return res;
+    //starts at 1 because res is initialized as num1
+}
+
+//Addition, Subtraction, Multiplication, Division, Modulus, and Exponents functions
 
 int main(int argc, char **argv) {
     uint32_t num1 = 0, num2 = 0, res = 0, rem = 0;
@@ -67,10 +76,12 @@ int main(int argc, char **argv) {
         case 's': s = set_insert(s, 1); break;
         case 'm': s = set_insert(s, 2); break;
         case 'd': s = set_insert(s, 3); break;
-        case 'H': s = set_insert(s, 4); break;
+        case 'r': s = set_insert(s, 4); break;
+        case 'e': s = set_insert(s, 5); break;
+        case 'H': s = set_insert(s, 31); break;
         }
     }
-    if (set_member(s, 4) || s == 0) {
+    if (set_member(s, 31) || s == 0) {
         fprintf(stderr, "\nSYNOPSIS\n"
                         "   A simple add/sub/mul/div calculator for unsigned integers. No decimals: displays remainder if any.\n"
                         "\n"
@@ -83,6 +94,8 @@ int main(int argc, char **argv) {
                         "   -s              Subtract num1 and num2.\n"
                         "   -m              Multiply num1 and num2.\n"
                         "   -d              Divide num1 and num2, displays remainder.\n"
+                        "   -r              Mods num1 and num2 (returns the remainder).\n"
+                        "   -e              Raises num1 to the power of num2.\n"
                         "   -i num1         Set num1 to uint32_t (unsigned 32-bit int) (default value: 0).\n"
                         "   -j num2         Set num2 to uint32_t (unsigned 32-bit int) (default value: 0).\n"
                         "   -p elements     Specify number of elements to print (default: 100).\n");
@@ -103,6 +116,14 @@ int main(int argc, char **argv) {
 
     if (set_member(s, 3)) {
         res = quo(num1, num2); rem = mod(num1, num2); printf("%" PRIu32 " / %" PRIu32 " = %" PRIu32 ", remainder = %u\n", num1, num2, res, rem);
+    }
+    
+    if (set_member(s, 4)) {
+        res = mod(num1, num2); printf("%" PRIu32 " mod %" PRIu32 " = %" PRIu32 "\n", num1, num2, res);
+    }
+
+    if (set_member(s, 5)) {
+        res = power(num1, num2); printf("%" PRIu32 " ^ %" PRIu32 " = %" PRIu32 "\n", num1, num2, res);
     }
     return 0;
 }
