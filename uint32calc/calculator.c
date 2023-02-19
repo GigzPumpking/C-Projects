@@ -23,6 +23,32 @@ bool set_member(Set s, uint8_t x) {
 
 //Use Sets as a boolean cabinet to check for operations.
 
+uint32_t add(uint32_t num1, uint32_t num2) {
+    return num1 + num2;
+}
+
+uint32_t sub(uint32_t num1, uint32_t num2) {
+    if (num1 < num2) {
+        printf("%" PRIu32 " is less than %" PRIu32 ". Since we are working with unsigned integers, the following value will be unsigned, but still represents a negative integer.\n", num1, num2);
+        return num2 - num1;
+    }
+    else {
+        return num1 - num2;
+    }
+}
+
+uint32_t mul(uint32_t num1, uint32_t num2) {
+    return num1 * num2;
+}
+
+uint32_t quo(uint32_t num1, uint32_t num2) {
+    return num1 / num2;
+}
+
+uint32_t mod(uint32_t num1, uint32_t num2) {
+    return num1 % num2;
+}
+
 int main(int argc, char **argv) {
     uint32_t num1 = 0, num2 = 0, res = 0, rem = 0;
     Set s = 0;
@@ -61,19 +87,19 @@ int main(int argc, char **argv) {
     }
     
     if (set_member(s, 0)) {
-        res = num1 + num2; printf("%" PRIu32 " + %" PRIu32 "= %" PRIu32 "\n", num1, num2, res);
+        res = add(num1, num2); printf("%" PRIu32 " + %" PRIu32 " = %" PRIu32 "\n", num1, num2, res);
     } 
 
     if (set_member(s, 1)) {
-        res = num1 - num2; printf("%" PRIu32 " - %" PRIu32 "= %" PRIu32 "\n", num1, num2, res);
+        res = sub(num1, num2); printf("%" PRIu32 " - %" PRIu32 " = %" PRIu32 "\n", num1, num2, res);
     }
 
     if (set_member(s, 2)) {
-        res = num1 * num2; printf("%" PRIu32 " * %" PRIu32 "= %" PRIu32 "\n", num1, num2, res);
+        res = mul(num1, num2); printf("%" PRIu32 " * %" PRIu32 " = %" PRIu32 "\n", num1, num2, res);
     }
 
     if (set_member(s, 3)) {
-        res = num1 / num2; rem = num1 % num2; printf("%" PRIu32 " / %" PRIu32 "= %" PRIu32 " remainder = %u\n", num1, num2, res, rem);
+        res = quo(num1, num2); rem = mod(num1, num2); printf("%" PRIu32 " / %" PRIu32 " = %" PRIu32 ", remainder = %u\n", num1, num2, res, rem);
     }
     return 0;
 }
